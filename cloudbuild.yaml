@@ -1,6 +1,14 @@
 steps:
+  # Build and push the train model image
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/dtumlops-411611/train-model-image', '-f', 'dockerfiles/train_model.dockerfile', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/dtumlops-411611/train-model-image']
+
+  # Build and push the predict model image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/dtumlops-411611/predict-model-image', '-f', 'dockerfiles/predict_model.dockerfile', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/dtumlops-411611/predict-model-image']
