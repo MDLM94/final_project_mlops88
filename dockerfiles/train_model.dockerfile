@@ -8,10 +8,14 @@ RUN apt update && \
 COPY requirements.txt requirements.txt
 COPY pyproject.toml pyproject.toml
 COPY mlops88_ezCNNs/ mlops88_ezCNNs/
-COPY data/ data/
+#COPY data/ data/
+
 
 WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
 RUN pip install . --no-deps --no-cache-dir
+
+# Copy DVC configuration files
+COPY .dvc /app/.dvc
 
 ENTRYPOINT ["python", "-u", "mlops88_ezCNNs/train_model.py"]
